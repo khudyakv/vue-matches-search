@@ -1,9 +1,6 @@
 <template>
   <ul class="space-y-4">
-    <li
-      v-if="!searchStore.allResult.length"
-      class="p-5 bg-zinc-700 space-y-2 text-xl"
-    >
+    <li v-if="noResults" class="space-y-2 bg-zinc-700 p-5 text-xl">
       Сорян, ничего не найдено.
     </li>
     <SearchListItem
@@ -15,8 +12,12 @@
 </template>
 
 <script setup>
-import SearchListItem from "./SearchListItem.vue";
 import { useSearchStore } from "@/stores/search";
+import { computed } from "vue";
 
 const searchStore = useSearchStore();
+
+const noResults = computed(() => {
+  return !searchStore.allResult.length;
+});
 </script>
